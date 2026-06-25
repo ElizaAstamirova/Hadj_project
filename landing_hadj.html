@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AL HAJJ — Священный путь начинается здесь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+/* ===================== TOKENS ===================== */
+:root{
+  --bg:            #0a0a0a;
+  --bg-1:          #0e0e0e;
+  --bg-card:       #131313;
+  --bg-card-2:     #161616;
+
+  --silver-100:    #f4f4f4;
+  --silver-200:    #d8d8d8;
+  --silver-300:    #b8b8b8;
+  --silver-400:    #8c8c8c;
+  --silver-500:    #5c5c5c;
+
+  --text-1:        #f3f3f1;
+  --text-2:        #a9a9a6;
+  --text-3:        #6f6f6c;
+
+  --border-1:      rgba(216,216,216,0.10);
+  --border-2:      rgba(216,216,216,0.18);
+
+  --metal: linear-gradient(115deg, #8c8c8c 0%, #e8e8e8 22%, #f8f8f6 32%, #9c9c9c 48%, #cfcfcf 62%, #6e6e6e 80%, #d6d6d6 100%);
+  --metal-soft: linear-gradient(135deg, rgba(244,244,244,0.9), rgba(140,140,140,0.55));
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+
+  --container: 1180px;
+  --radius: 2px;
+  --ease: cubic-bezier(.16,.84,.32,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--text-1);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+img,svg{display:block;max-width:100%;}
+
+a{color:inherit;text-decoration:none;}
+
+ul{list-style:none;}
+
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+input,select{font-family:inherit;}
+
+:focus-visible{outline:1px solid var(--silver-200);outline-offset:3px;}
+
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:0 32px;
+}
+
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  font-size:12px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--silver-300);
+  font-weight:500;
+  margin-bottom:22px;
+}
+.eyebrow::before{
+  content:'';
+  width:28px;height:1px;
+  background:var(--metal);
+}
+
+h1,h2,h3{
+  font-family:var(--font-display);
+  font-weight:600;
+  letter-spacing:-0.01em;
+  color:var(--text-1);
+}
+
+.section-title{
+  font-size:clamp(30px,4vw,46px);
+  line-height:1.15;
+  margin-bottom:18px;
+}
+
+.section-lede{
+  max-width:560px;
+  color:var(--text-2);
+  font-size:16px;
+  line-height:1.75;
+}
+
+.section-head{
+  margin-bottom:64px;
+}
+
+section{
+  position:relative;
+  padding:120px 0;
+}
+
+/* shared reveal-on-scroll */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+
+/* buttons */
+.btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:15px 30px;
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:600;
+  border-radius:var(--radius);
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.btn-primary{
+  color:#0a0a0a;
+  background:var(--metal);
+  background-size:200% 200%;
+  background-position:0% 50%;
+}
+.btn-primary::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 30%, rgba(255,255,255,0.65) 50%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform 0.7s var(--ease);
+}
+.btn-primary:hover::after{transform:translateX(120%);}
+.btn-primary:hover{transform:translateY(-2px);}
+
+.btn-ghost{
+  color:var(--text-1);
+  border:1px solid var(--border-2);
+  background:rgba(255,255,255,0.02);
+}
+.btn-ghost:hover{
+  border-color:var(--silver-300);
+  background:rgba(255,255,255,0.05);
+}
+
+.btn-block{width:100%;}
+
+/* ===================== HEADER ===================== */
+.header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  padding:26px 0;
+  transition:padding 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.header.is-scrolled{
+  padding:16px 0;
+  background:rgba(10,10,10,0.66);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  border-color:var(--border-1);
+}
+.header .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-family:var(--font-display);
+  font-size:21px;
+  letter-spacing:0.06em;
+  font-weight:600;
+  display:flex;
+  flex-direction:column;
+  line-height:1;
+}
+.logo span{
+  margin-top:6px;
+  width:34px;height:1px;
+  background:var(--metal);
+}
+.nav-links{
+  display:flex;
+  gap:42px;
+  font-size:13px;
+  letter-spacing:0.04em;
+}
+.nav-links a{
+  color:var(--text-2);
+  position:relative;
+  padding-bottom:4px;
+  transition:color 0.3s var(--ease);
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;left:0;bottom:0;
+  width:0;height:1px;
+  background:var(--silver-200);
+  transition:width 0.35s var(--ease);
+}
+.nav-links a:hover{color:var(--text-1);}
+.nav-links a:hover::after{width:100%;}
+
+.header-right{display:flex;align-items:center;gap:28px;}
+
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  width:24px;
+  z-index:101;
+}
+.nav-toggle span{
+  height:1px;width:100%;
+  background:var(--silver-200);
+  transition:transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.nav-toggle.is-open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.nav-toggle.is-open span:nth-child(2){opacity:0;}
+.nav-toggle.is-open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* ===================== HERO ===================== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding-top:120px;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 20%, rgba(120,120,120,0.10), transparent 55%),
+             radial-gradient(ellipse at 15% 85%, rgba(90,90,90,0.08), transparent 55%);
+  pointer-events:none;
+}
+.geo-motif{
+  position:absolute;
+  top:50%;right:-8%;
+  width:min(62vw,760px);
+  transform:translateY(-50%);
+  opacity:0.55;
+  pointer-events:none;
+  will-change:transform;
+}
+.geo-motif .spin{
+  transform-origin:200px 200px;
+  animation:spin 90s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+@media (prefers-reduced-motion: reduce){.geo-motif .spin{animation:none;}}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:640px;
+}
+.hero-content h1{
+  font-size:clamp(40px,6vw,68px);
+  line-height:1.08;
+  margin-bottom:26px;
+}
+.hero-content h1 em{
+  font-style:italic;
+  background:var(--metal);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-content p{
+  font-size:17px;
+  color:var(--text-2);
+  max-width:480px;
+  margin-bottom:42px;
+}
+.hero-actions{display:flex;gap:18px;flex-wrap:wrap;}
+
+.hero-meta{
+  position:relative;
+  z-index:2;
+  display:flex;
+  gap:48px;
+  margin-top:96px;
+  padding-top:28px;
+  border-top:1px solid var(--border-1);
+  max-width:640px;
+}
+.hero-meta div{font-size:13px;color:var(--text-3);}
+.hero-meta strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:20px;
+  color:var(--text-1);
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+/* ===================== ABOUT / BENTO + TIMELINE ===================== */
+.about{background:var(--bg-1);}
+
+.bento{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto auto;
+  gap:1px;
+  background:var(--border-1);
+  border:1px solid var(--border-1);
+  margin-bottom:110px;
+}
+.bento-cell{
+  background:var(--bg-card);
+  padding:38px;
+}
+.bento-cell.large{grid-column:span 2;grid-row:span 2;}
+.bento-cell.tall{grid-row:span 2;}
+.bento-cell h3{
+  font-size:13px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--silver-300);
+  font-weight:600;
+  margin-bottom:16px;
+}
+.bento-cell.large h3{font-size:14px;}
+.bento-cell.large p{
+  font-size:17px;
+  line-height:1.8;
+  color:var(--text-2);
+  margin-top:auto;
+}
+.bento-cell .big-figure{
+  font-family:var(--font-display);
+  font-size:52px;
+  line-height:1;
+  background:var(--metal);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  margin-bottom:10px;
+}
+.bento-cell .pillars{display:flex;flex-direction:column;gap:11px;}
+.bento-cell .pillars li{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  font-size:14px;
+  color:var(--text-2);
+}
+.bento-cell .pillars li.is-current{color:var(--text-1);font-weight:500;}
+.bento-cell .pillars li span{
+  font-family:var(--font-display);
+  font-size:11px;
+  color:var(--silver-400);
+}
+.bento-cell.large{display:flex;flex-direction:column;justify-content:space-between;}
+
+/* timeline */
+.timeline{position:relative;padding-left:0;}
+.timeline-line{
+  position:absolute;
+  left:18px;top:8px;bottom:8px;
+  width:1px;
+  background:linear-gradient(to bottom, transparent, var(--border-2) 8%, var(--border-2) 92%, transparent);
+}
+.timeline-item{
+  position:relative;
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:32px;
+  padding:0 0 52px 0;
+  margin-left:0;
+}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-dot{
+  position:absolute;
+  left:14px;top:4px;
+  width:9px;height:9px;
+  border-radius:50%;
+  background:var(--bg-1);
+  border:1px solid var(--silver-300);
+}
+.timeline-item:hover .timeline-dot{background:var(--silver-200);}
+.timeline-day{
+  padding-left:48px;
+  font-size:13px;
+  color:var(--silver-300);
+  letter-spacing:0.03em;
+  padding-top:2px;
+}
+.timeline-day strong{
+  display:block;
+  font-family:var(--font-display);
+  font-size:24px;
+  color:var(--text-1);
+  font-weight:600;
+}
+.timeline-body h4{
+  font-family:var(--font-display);
+  font-size:19px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+.timeline-body p{
+  font-size:15px;
+  color:var(--text-2);
+  max-width:520px;
+}
+
+/* ===================== PRICING ===================== */
+.pricing{background:var(--bg);}
+.pricing-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+.plan{
+  position:relative;
+  background:var(--bg-card);
+  border:1px solid var(--border-1);
+  padding:42px 36px;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  transition:border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.plan::before{
+  content:'';
+  position:absolute;
+  top:-60%;left:-60%;
+  width:60%;height:220%;
+  background:linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+  transform:translateX(-160%) rotate(8deg);
+  transition:transform 0.9s var(--ease);
+  pointer-events:none;
+}
+.plan:hover::before{transform:translateX(220%) rotate(8deg);}
+.plan:hover{border-color:var(--border-2);transform:translateY(-4px);}
+.plan.is-featured{
+  border-color:var(--silver-400);
+  background:linear-gradient(180deg, var(--bg-card-2), var(--bg-card));
+}
+.plan-badge{
+  position:absolute;top:24px;right:24px;
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:#0a0a0a;
+  background:var(--metal);
+  padding:5px 10px;
+}
+.plan-name{
+  font-size:13px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--silver-300);
+  margin-bottom:18px;
+}
+.plan-price{
+  font-family:var(--font-display);
+  font-size:38px;
+  font-weight:600;
+  margin-bottom:4px;
+}
+.plan-price span{font-size:14px;color:var(--text-3);font-family:var(--font-body);font-weight:400;}
+.plan-sub{font-size:13px;color:var(--text-3);margin-bottom:30px;}
+.plan-features{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;flex:1;}
+.plan-features li{
+  display:flex;
+  gap:12px;
+  font-size:14px;
+  color:var(--text-2);
+  align-items:flex-start;
+}
+.plan-features li.is-off{color:var(--text-3);}
+.plan-features li svg{flex-shrink:0;margin-top:3px;}
+
+/* ===================== BOOKING FORM ===================== */
+.booking{background:var(--bg-1);}
+.booking-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+}
+.booking-form{
+  background:rgba(255,255,255,0.025);
+  border:1px solid var(--border-1);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  padding:46px;
+}
+.field{margin-bottom:22px;}
+.field label{
+  display:block;
+  font-size:12px;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--text-3);
+  margin-bottom:9px;
+}
+.field input,.field select{
+  width:100%;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border-2);
+  color:var(--text-1);
+  padding:14px 16px;
+  font-size:15px;
+  border-radius:var(--radius);
+  transition:border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.field input::placeholder{color:var(--text-3);}
+.field input:focus,.field select:focus{
+  border-color:var(--silver-300);
+  background:rgba(255,255,255,0.05);
+}
+.field select{appearance:none;cursor:pointer;}
+.form-foot{font-size:12px;color:var(--text-3);margin-top:16px;text-align:center;}
+.form-success{
+  display:none;
+  text-align:center;
+  padding:30px 10px;
+}
+.form-success.is-visible{display:block;}
+.form-success svg{margin:0 auto 18px;}
+.form-success h4{font-family:var(--font-display);font-size:22px;margin-bottom:10px;}
+.form-success p{color:var(--text-2);font-size:14px;}
+
+.booking-info h3{
+  font-family:var(--font-display);
+  font-size:26px;
+  margin-bottom:18px;
+}
+.booking-info p{color:var(--text-2);font-size:15px;margin-bottom:28px;max-width:420px;}
+.booking-info ul{display:flex;flex-direction:column;gap:16px;}
+.booking-info ul li{display:flex;gap:14px;font-size:14px;color:var(--text-2);align-items:flex-start;}
+
+/* ===================== FOOTER ===================== */
+.footer{
+  background:#070707;
+  border-top:1px solid var(--border-1);
+  padding:80px 0 30px;
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:56px;
+  border-bottom:1px solid var(--border-1);
+}
+.footer-brand p{
+  color:var(--text-3);
+  font-size:14px;
+  margin-top:18px;
+  max-width:280px;
+  line-height:1.7;
+}
+.footer-col h5{
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--silver-300);
+  margin-bottom:18px;
+}
+.footer-col ul{display:flex;flex-direction:column;gap:12px;}
+.footer-col a{color:var(--text-2);font-size:14px;transition:color 0.3s var(--ease);}
+.footer-col a:hover{color:var(--text-1);}
+.socials{display:flex;gap:10px;margin-top:20px;}
+.socials a{
+  width:34px;height:34px;
+  border:1px solid var(--border-2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;letter-spacing:0.02em;
+  color:var(--text-2);
+  transition:border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.socials a:hover{border-color:var(--silver-300);color:var(--text-1);}
+.footer-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:26px;
+  font-size:12px;
+  color:var(--text-3);
+  flex-wrap:wrap;
+  gap:12px;
+}
+.footer-bottom .legal{display:flex;gap:24px;}
+.footer-bottom a:hover{color:var(--text-2);}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:980px){
+  .bento{grid-template-columns:repeat(2,1fr);}
+  .bento-cell.large{grid-column:span 2;grid-row:auto;}
+  .bento-cell.tall{grid-row:auto;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .booking-wrap{grid-template-columns:1fr;gap:50px;}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px;}
+}
+
+@media (max-width:760px){
+  section{padding:88px 0;}
+  .nav-links{
+    position:fixed;
+    top:0;right:0;
+    height:100vh;
+    width:min(74vw,320px);
+    background:rgba(10,10,10,0.97);
+    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(16px);
+    flex-direction:column;
+    justify-content:center;
+    gap:30px;
+    padding:0 40px;
+    transform:translateX(100%);
+    transition:transform 0.4s var(--ease);
+    border-left:1px solid var(--border-1);
+  }
+  .nav-links.is-open{transform:translateX(0);}
+  .nav-toggle{display:flex;}
+  .header-right .btn-ghost{display:none;}
+  .hero-meta{flex-direction:column;gap:18px;margin-top:64px;}
+  .geo-motif{opacity:0.3;width:90vw;right:-30%;}
+  .footer-grid{grid-template-columns:1fr;gap:36px;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="header" id="site-header">
+  <div class="container">
+    <a href="#hero" class="logo">AL&nbsp;HAJJ<span></span></a>
+    <nav class="nav-links" id="nav-links">
+      <a href="#hero">Главная</a>
+      <a href="#about">О Хадже</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-right">
+      <a href="#booking" class="btn btn-ghost">Забронировать</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <svg class="geo-motif" id="geo-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <g class="spin" stroke="#9a9a9a" stroke-width="0.75" fill="none">
+        <rect x="100" y="100" width="200" height="200" transform="rotate(45 200 200)"/>
+        <rect x="100" y="100" width="200" height="200"/>
+        <circle cx="200" cy="200" r="142"/>
+        <circle cx="200" cy="200" r="160"/>
+        <circle cx="200" cy="200" r="4" fill="#9a9a9a" stroke="none"/>
+      </g>
+    </svg>
+
+    <div class="container">
+      <div class="hero-content reveal is-visible">
+        <div class="eyebrow">Хадж · 1448 / 2026</div>
+        <h1>Священный путь<br><em>начинается</em> здесь</h1>
+        <p>Сопровождаем паломников на каждом шаге — от визы и перелёта до возвращения домой. Достоинство, забота и безупречная организация на пути к Каабе.</p>
+        <div class="hero-actions">
+          <a href="#booking" class="btn btn-primary">Забронировать путёвку</a>
+          <a href="#about" class="btn btn-ghost">Узнать о Хадже</a>
+        </div>
+      </div>
+      <div class="hero-meta reveal is-visible">
+        <div><strong>15&nbsp;лет</strong>организуем Хадж и Умру</div>
+        <div><strong>3&nbsp;тарифа</strong>от эконом до премиум</div>
+        <div><strong>24/7</strong>сопровождение группы</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">О Хадже</div>
+        <h2 class="section-title">Пятый столп Ислама</h2>
+        <p class="section-lede">Хадж — паломничество в Мекку, обязательное хотя бы раз в жизни для каждого взрослого мусульманина, способного совершить его физически и материально.</p>
+      </div>
+
+      <div class="bento reveal">
+        <div class="bento-cell large">
+          <h3>Значение Хаджа</h3>
+          <p>Хадж символизирует единство, равенство и покорность перед Всевышним. На время паломничества исчезают различия в статусе и происхождении — все паломники облачены в простой ихрам и обращены к одной цели.</p>
+        </div>
+        <div class="bento-cell">
+          <h3>Когда</h3>
+          <div class="big-figure">8–13</div>
+          <p style="color:var(--text-2);font-size:14px;">Зуль-хиджа, последнего месяца исламского календаря</p>
+        </div>
+        <div class="bento-cell tall">
+          <h3>5 столпов Ислама</h3>
+          <ul class="pillars">
+            <li><span>01</span> Шахада — свидетельство веры</li>
+            <li><span>02</span> Намаз — молитва пятикратно в день</li>
+            <li><span>03</span> Закят — очистительная милостыня</li>
+            <li><span>04</span> Ураза — пост в Рамадан</li>
+            <li class="is-current"><span>05</span> Хадж — паломничество в Мекку</li>
+          </ul>
+        </div>
+        <div class="bento-cell">
+          <h3>Кому обязателен</h3>
+          <p style="color:var(--text-2);font-size:14px;">Взрослым, здоровым мусульманам, имеющим средства на дорогу и обеспечение семьи на время отсутствия.</p>
+        </div>
+      </div>
+
+      <div class="section-head reveal">
+        <div class="eyebrow">Хронология</div>
+        <h2 class="section-title">Шаги паломничества</h2>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day"><strong>8</strong>Зуль-хиджа</div>
+          <div class="timeline-body">
+            <h4>Ихрам и выезд в Мину</h4>
+            <p>Паломники облачаются в ихрам, произносят нийят и отправляются в долину Мина, где проводят день в молитвах.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day"><strong>9</strong>Зуль-хиджа</div>
+          <div class="timeline-body">
+            <h4>День Арафата</h4>
+            <p>Главный день Хаджа — стояние на равнине Арафат с молитвой и покаянием до захода солнца.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day"><strong>9–10</strong>ночь</div>
+          <div class="timeline-body">
+            <h4>Муздалифа</h4>
+            <p>Ночёвка под открытым небом, сбор камней для предстоящего ритуала бросания камней в Джамарат.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day"><strong>10</strong>Зуль-хиджа</div>
+          <div class="timeline-body">
+            <h4>Курбан-байрам</h4>
+            <p>Бросание камней в столб Джамарат аль-Кубра, жертвоприношение и большой таваф вокруг Каабы.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day"><strong>11–12</strong>Зуль-хиджа</div>
+          <div class="timeline-body">
+            <h4>Дни в Мине</h4>
+            <p>Продолжение ритуала бросания камней во все три столба Джамарата в течение двух-трёх дней.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-day">Перед<br>отъездом</div>
+          <div class="timeline-body">
+            <h4>Прощальный таваф</h4>
+            <p>Завершающий обход вокруг Каабы перед отъездом из Мекки домой.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="eyebrow">Тарифы</div>
+        <h2 class="section-title">Путёвки на Хадж 2026</h2>
+        <p class="section-lede">Три уровня сервиса — от бюджетной организации до полностью индивидуального сопровождения.</p>
+      </div>
+
+      <div class="pricing-grid reveal">
+
+        <div class="plan" data-plan="Эконом">
+          <div class="plan-name">Эконом</div>
+          <div class="plan-price">от $2&nbsp;900<span> / чел.</span></div>
+          <div class="plan-sub">Базовый комфорт, групповая организация</div>
+          <ul class="plan-features">
+            <li>✓ Авиаперелёт, эконом-класс</li>
+            <li>✓ Отель 3★, 1.5&nbsp;км от Харама</li>
+            <li>✓ Оформление визы</li>
+            <li>✓ Групповой трансфер</li>
+            <li>✓ Гид-сопровождающий (группа)</li>
+            <li class="is-off">— Индивидуальный гид</li>
+          </ul>
+          <button class="btn btn-ghost btn-block" onclick="selectPlan('Эконом')">Купить путёвку</button>
+        </div>
+
+        <div class="plan is-featured" data-plan="Стандарт">
+          <span class="plan-badge">Популярный</span>
+          <div class="plan-name">Стандарт</div>
+          <div class="plan-price">от $4&nbsp;500<span> / чел.</span></div>
+          <div class="plan-sub">Оптимальный баланс комфорта и цены</div>
+          <ul class="plan-features">
+            <li>✓ Авиаперелёт прямой</li>
+            <li>✓ Отель 4★, 800&nbsp;м от Харама</li>
+            <li>✓ Оформление визы</li>
+            <li>✓ Индивидуальный трансфер</li>
+            <li>✓ Завтрак и ужин</li>
+            <li>✓ Персональный гид</li>
+          </ul>
+          <button class="btn btn-primary btn-block" onclick="selectPlan('Стандарт')">Купить путёвку</button>
+        </div>
+
+        <div class="plan" data-plan="Премиум">
+          <div class="plan-name">Премиум</div>
+          <div class="plan-price">от $7&nbsp;900<span> / чел.</span></div>
+          <div class="plan-sub">Полностью индивидуальный сервис</div>
+          <ul class="plan-features">
+            <li>✓ Авиаперелёт, бизнес-класс</li>
+            <li>✓ Отель 5★, рядом с Харамом</li>
+            <li>✓ Оформление визы (срочно)</li>
+            <li>✓ VIP-трансфер</li>
+            <li>✓ Полный пансион</li>
+            <li>✓ Персональный гид и консьерж</li>
+          </ul>
+          <button class="btn btn-ghost btn-block" onclick="selectPlan('Премиум')">Купить путёвку</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BOOKING ===================== -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="booking-wrap">
+
+        <div class="booking-info reveal">
+          <div class="eyebrow">Бронирование</div>
+          <h3>Оставьте заявку — мы свяжемся с вами</h3>
+          <p>Менеджер уточнит детали поездки, ответит на вопросы по визе и поможет выбрать подходящий тариф.</p>
+          <ul>
+            <li>✓ Ответ в течение 24 часов</li>
+            <li>✓ Бесплатная консультация по документам</li>
+            <li>✓ Фиксация цены на момент бронирования</li>
+          </ul>
+        </div>
+
+        <div class="booking-form reveal">
+          <form id="booking-form">
+            <div class="field">
+              <label for="f-name">Имя</label>
+              <input type="text" id="f-name" placeholder="Ваше имя" required>
+            </div>
+            <div class="field">
+              <label for="f-phone">Телефон</label>
+              <input type="tel" id="f-phone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+            <div class="field">
+              <label for="f-plan">Тариф</label>
+              <select id="f-plan">
+                <option value="Эконом">Эконом</option>
+                <option value="Стандарт" selected>Стандарт</option>
+                <option value="Премиум">Премиум</option>
+                <option value="Не определился">Пока не определился</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Отправить заявку</button>
+            <p class="form-foot">Нажимая «Отправить», вы соглашаетесь с условиями обработки данных</p>
+          </form>
+          <div class="form-success" id="form-success">
+            <svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" stroke="#cfcfcf" stroke-width="1" fill="none"/><path d="M12 21l5 5 11-13" stroke="#f0f0f0" stroke-width="1.5" fill="none"/></svg>
+            <h4>Заявка отправлена</h4>
+            <p>Мы свяжемся с вами в течение 24 часов для уточнения деталей.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" id="contacts">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="logo">AL&nbsp;HAJJ<span></span></a>
+        <p>Организация паломничества к святым местам Мекки и Медины. С заботой о каждом госте — от первого звонка до возвращения домой.</p>
+        <div class="socials">
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="WhatsApp">WA</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Навигация</h5>
+        <ul>
+          <li><a href="#hero">Главная</a></li>
+          <li><a href="#about">О Хадже</a></li>
+          <li><a href="#pricing">Тарифы</a></li>
+          <li><a href="#booking">Бронирование</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Контакты</h5>
+        <ul>
+          <li><a href="tel:+70000000000">+7 (000) 000-00-00</a></li>
+          <li><a href="mailto:info@al-hajj.example">info@al-hajj.example</a></li>
+          <li>Москва, ул. Примерная, 1</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Правовая информация</h5>
+        <ul>
+          <li><a href="#">Политика конфиденциальности</a></li>
+          <li><a href="#">Публичная оферта</a></li>
+          <li><a href="#">Лицензия туроператора</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AL HAJJ. Все права защищены.</span>
+      <div class="legal">
+        <a href="#">Условия использования</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* header scroll state */
+  var header = document.getElementById('site-header');
+  function onScroll(){
+    if(window.scrollY > 30){ header.classList.add('is-scrolled'); }
+    else{ header.classList.remove('is-scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* mobile nav toggle */
+  var toggle = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('nav-links');
+  toggle.addEventListener('click', function(){
+    toggle.classList.toggle('is-open');
+    navLinks.classList.toggle('is-open');
+  });
+  navLinks.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      toggle.classList.remove('is-open');
+      navLinks.classList.remove('is-open');
+    });
+  });
+
+  /* reveal on scroll */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){
+      observer.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  /* subtle parallax for hero geometric motif */
+  var motif = document.getElementById('geo-motif');
+  if(motif && !reduceMotion){
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      motif.style.transform = 'translateY(' + (-50 + y * 0.04) + '%) translateX(' + (y * 0.02) + 'px)';
+    }, {passive:true});
+  }
+
+  /* pricing -> booking form */
+  window.selectPlan = function(planName){
+    var select = document.getElementById('f-plan');
+    if(select){ select.value = planName; }
+    var target = document.getElementById('booking');
+    if(target){ target.scrollIntoView({behavior:'smooth'}); }
+  };
+
+  /* booking form submit (demo only, no backend) */
+  var form = document.getElementById('booking-form');
+  var success = document.getElementById('form-success');
+  if(form){
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      form.style.display = 'none';
+      success.classList.add('is-visible');
+    });
+  }
+
+})();
+</script>
+
+</body>
+</html>
